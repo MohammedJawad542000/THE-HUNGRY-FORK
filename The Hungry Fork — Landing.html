@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hungry Fork — Landing</title>
+<meta name="description" content="The Hungry Fork — handcrafted meals, modern dining. Book a table or pre-order our signature dishes.">
+
+<style>
+  /* -------------------------
+     Variables & Base Reset
+     ------------------------- */
+  :root{
+    --bg-900: #071022;
+    --bg-800: #0b1220;
+    --card: #0f1724;
+    --muted: #9aa4b2;
+    --accent: #ff6b35;
+    --accent-2: #06b6d4;
+    --glass: rgba(255,255,255,0.04);
+    --radius: 14px;
+    --maxw: 1200px;
+    --ease: cubic-bezier(.2,.9,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg, var(--bg-900), #041021 120%);
+    color: #eaf1fb;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.5;
+    padding-bottom:3rem;
+  }
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:1rem;}
+
+  /* -------------------------
+     Header / Navigation
+     ------------------------- */
+  header{
+    position:sticky; top:0; z-index:120; backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.35));
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    transition: padding 200ms var(--ease), box-shadow 200ms var(--ease);
+  }
+  header.shrink{ padding:6px 0; box-shadow: 0 10px 40px rgba(2,6,23,0.6); }
+  .nav { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:14px 1rem; max-width:var(--maxw); margin:0 auto; }
+  .brand { display:flex; gap:.75rem; align-items:center; }
+  .logo{ width:44px; height:44px; border-radius:10px; background:linear-gradient(135deg,var(--accent),#ff9a6a); display:grid; place-items:center; font-weight:800; color:#081221; box-shadow:0 12px 28px rgba(255,107,53,0.12) }
+  .brand h1{ font-size:1rem; letter-spacing:-0.2px }
+  nav.desktop { display:flex; gap:1rem; align-items:center; }
+  nav.desktop a { color:var(--muted); text-decoration:none; padding:.4rem .6rem; border-radius:8px; font-weight:700; font-size:.95rem;}
+  nav.desktop a:hover { color:#fff; background: rgba(255,255,255,0.02) }
+  .cta { background:var(--accent); color:#081221; padding:.55rem .9rem; border-radius:10px; font-weight:900; text-decoration:none; box-shadow:0 12px 30px rgba(255,107,53,0.12); }
+
+  /* Mobile nav (simple) */
+  .mobile-toggle { display:none; background:transparent; border:0; color:var(--muted); font-size:1.2rem; }
+
+  /* -------------------------
+     Hero (video background)
+     ------------------------- */
+  .hero {
+    position:relative; height:88vh; min-height:520px; margin:1.5rem 0; border-radius:18px; overflow:hidden;
+    box-shadow: 0 20px 60px rgba(2,6,23,0.6);
+  }
+  /* video and fallback cover the hero area */
+  .hero video, .hero .fallback {
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  }
+  .hero::after {
+    content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(3,6,16,0.12), rgba(2,6,23,0.6)); pointer-events:none;
+  }
+  .hero-inner { position:relative; z-index:5; height:100%; display:flex; gap:2rem; align-items:center; justify-content:space-between; padding:3.25rem; }
+  .hero-left { flex:1; max-width:720px; }
+  .kicker { display:inline-block; background:rgba(255,255,255,0.04); padding:.45rem .7rem; border-radius:999px; color:var(--accent); font-weight:800; margin-bottom:1rem; font-size:.95rem }
+  h2.hero-title { font-size:clamp(1.6rem, 3.6vw, 3rem); margin-bottom:.5rem; line-height:1.02; color:#fff }
+  p.lead { color:var(--muted); margin-bottom:1.15rem; font-size:1rem }
+  .hero-ctas { display:flex; gap:1rem; align-items:center; flex-wrap:wrap }
+  .btn-light { background:transparent; border:1px solid rgba(255,255,255,0.06); padding:.6rem .95rem; border-radius:10px; color:#fff; font-weight:700 }
+  .device-card { width:360px; max-width:38%; min-width:260px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:1rem; border-radius:14px; border:1px solid rgba(255,255,255,0.03) }
+
+  /* Simple "product" visual inside hero */
+  .device-visual { height:300px; border-radius:10px; background: linear-gradient(180deg,#071226, #07112a); display:grid; place-items:center; color:#fff; margin-bottom:.8rem; }
+
+  .price { font-weight:900; color:var(--accent); font-size:1.3rem }
+  .badge { background: rgba(6,182,212,0.12); color:var(--accent-2); padding:.3rem .6rem; border-radius:999px; font-weight:800; font-size:.85rem }
+
+  /* -------------------------
+     Sections: features, pricing, testimonials
+     ------------------------- */
+  section{ padding:3rem 1rem }
+  .wrap-section { max-width:var(--maxw); margin:0 auto }
+  h3.section-title { font-size:1.25rem; margin-bottom:.5rem; color:#fff }
+  p.section-sub { color:var(--muted); margin-bottom:1.25rem; max-width:860px }
+
+  /* Features grid */
+  .features-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1.1rem }
+  .feature { background:var(--glass); padding:1.1rem; border-radius:12px; display:flex; gap:1rem; align-items:flex-start; transition: transform 300ms var(--ease); }
+  .feature:hover { transform: translateY(-6px) }
+  .art { width:64px; height:64px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); font-size:26px; }
+
+  /* Pricing grid */
+  .pricing-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; align-items:stretch }
+  .price-card { padding:1.25rem; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; border:1px solid rgba(255,255,255,0.03) }
+  .price-card .title { font-weight:900; color:#fff }
+  .price-card .big { font-size:2rem; color:var(--accent); margin:.6rem 0; }
+
+  /* Testimonials slider */
+  .testi-row { display:flex; gap:1rem; align-items:center; }
+  .testi-track { display:flex; gap:1rem; transition: transform 400ms var(--ease); will-change: transform; }
+  .testi-card { min-width:260px; background:var(--glass); padding:1rem; border-radius:12px; }
+  .avatar { width:54px; height:54px; border-radius:999px; display:grid; place-items:center; font-weight:900; color:#081221; background: linear-gradient(135deg, var(--accent), #ff9a6a); margin-right:.8rem }
+
+  /* Media: video / images */
+  .media-grid { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:1rem }
+  .media-item { border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.03); }
+
+  /* CTA band */
+  .cta-band { margin-top:1.25rem; padding:1rem; border-radius:12px; background: linear-gradient(90deg, rgba(255,107,53,0.08), rgba(6,182,212,0.06)); display:flex; justify-content:space-between; align-items:center; gap:1rem }
+
+  /* Modal */
+  .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(2,6,23,0.6); z-index:300 }
+  .modal.open { display:flex }
+  .modal-card { width:100%; max-width:560px; background: linear-gradient(180deg,#081226,#071226); padding:1.25rem; border-radius:12px; border:1px solid rgba(255,255,255,0.03) }
+  .form-row { display:flex; flex-direction:column; gap:.5rem; margin-bottom:.75rem }
+  input, textarea, select { background:#0b1220; border:1px solid rgba(255,255,255,0.03); padding:.75rem; border-radius:8px; color:#eaf1fb; }
+  button.primary { background:var(--accent); color:#081221; border:0; padding:.7rem 1rem; border-radius:10px; font-weight:800; cursor:pointer }
+
+  /* Footer */
+  footer { text-align:center; padding:2rem 1rem; color:var(--muted) }
+
+  /* -------------------------
+     Responsive
+     ------------------------- */
+  @media (max-width:980px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr) }
+    .pricing-grid { grid-template-columns: repeat(2, 1fr) }
+    .hero-inner { flex-direction:column-reverse; gap:1rem; padding:2rem }
+    .device-card { width:92% }
+    .testi-card { min-width:220px }
+    .media-grid { grid-template-columns: 1fr }
+  }
+  @media (max-width:640px) {
+    nav.desktop { display:none }
+    .mobile-toggle { display:inline-block }
+    .features-grid { grid-template-columns:1fr }
+    .pricing-grid { grid-template-columns:1fr }
+    .hero { height:auto; min-height:420px; }
+    .hero-inner { padding:1.25rem }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="siteHeader" class="">
+  <div class="nav wrap">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">HF</div>
+      <div>
+        <h1>The Hungry Fork</h1>
+        <div style="font-size:.78rem;color:var(--muted)">Where every bite feels like home</div>
+      </div>
+    </div>
+
+    <nav class="desktop" role="navigation" aria-label="Main">
+      <a href="file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html#features">Why Us</a>
+      <a href="file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html#pricing">Pricing</a>
+      <a href="file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html#testimonials">Testimonials</a>
+      <a href="file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html#media">Media</a>
+      <a class="cta" href="file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html#contact" onclick="openModal(&#39;Book a Table&#39;)">Book a Table</a>
+    </nav>
+
+    <button class="mobile-toggle" aria-label="Open menu" onclick="toggleMobileNav()">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<main class="wrap" id="top">
+  <section class="hero" aria-label="Hero">
+    <!-- Video: place hero.mp4 in same folder to play; fallback SVG shown underneath when video not available -->
+    <video id="heroVideo" autoplay="" muted="" loop="" playsinline="" style="display: none;">
+      <source src="hero.mp4" type="video/mp4">
+      <!-- Browsers that can't play the video will use the fallback below -->
+    </video>
+
+    <!-- Fallback decorative SVG (visible if video not loaded) -->
+    <div class="fallback" aria-hidden="true">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+        <defs>
+          <lineargradient id="bgG" x1="0" x2="1"><stop offset="0" stop-color="#071226"></stop><stop offset="1" stop-color="#021026"></stop></lineargradient>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#bgG)"></rect>
+        <!-- Decorative food/plate illustration -->
+        <g transform="translate(240,160)" fill="#ff9a6a">
+          <ellipse cx="420" cy="220" rx="180" ry="170" fill="#fff4ea" stroke="#ffd9bf" stroke-width="8"></ellipse>
+          <path d="M360 205c6-22 46-28 70-8 24 20 4 48-4 60 0 0 14 6 12 20-2 14-38 14-56 6-18-8-20-30-28-32-8-2-0-28 0-28z" fill="#ff8a5a"></path>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Content over video -->
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="kicker">NEW — Seasonal Menu</div>
+        <h2 class="hero-title">Handcrafted meals &amp; unforgettable moments</h2>
+        <p class="lead">The Hungry Fork combines fresh local ingredients with bold flavors in a cozy, modern setting. Dine-in, takeout, or order online.</p>
+
+        <div class="hero-ctas">
+          <a class="cta" href="file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html#menu" onclick="openModal(&#39;Pre-order&#39;)">Pre-order Now</a>
+          <a class="btn-light" href="file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html#features">Learn More</a>
+        </div>
+
+        <div class="cta-band" style="margin-top:1rem;">
+          <div>
+            <strong>Limited Offer</strong>
+            <div class="small-muted">Use code <strong>SAVOUR20</strong> for 20% off your first order</div>
+          </div>
+          <div><a class="btn-light" href="file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html#pricing" onclick="openModal(&#39;Reserve&#39;)">Reserve a Table</a></div>
+        </div>
+      </div>
+
+      <aside class="device-card" aria-hidden="true">
+        <div class="device-visual" role="img" aria-label="Signature platter visual">
+          <!-- Inline SVG small plate -->
+          <svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialgradient id="plateGrad" cx="30%" cy="20%"><stop offset="0" stop-color="#fff6ec"></stop><stop offset="1" stop-color="#ffe6cc"></stop></radialgradient></defs>
+            <rect width="100%" height="100%" rx="12" fill="url(#plateGrad)"></rect>
+            <g transform="translate(60,40)">
+              <circle cx="160" cy="110" r="90" fill="#fff4ea" stroke="#ffd9bf" stroke-width="6"></circle>
+              <path d="M110 105c8-28 60-34 90-8 30 26 6 62-6 78 0 0 18 6 16 28-2 22-52 22-76 10-24-12-28-48-38-50-10-2-0-44 0-44z" fill="#ff9a6a"></path>
+            </g>
+          </svg>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.6rem">
+          <div>
+            <div style="font-weight:900">Chef's Signature Platter</div>
+            <div class="muted" style="font-size:.92rem">Perfect for sharing</div>
+          </div>
+          <div style="text-align:right">
+            <div class="price">$24</div>
+            <div class="badge">Best Seller</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <a class="btn-light" href="file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html#menu" onclick="openModal(&#39;View Menu&#39;)">View Menu</a>
+          <a class="cta" href="file:///C:/Users/mdjaw/Downloads/Landing%20page%203.html#contact" onclick="openModal(&#39;Book Table&#39;)">Book</a>
+        </div>
+
+        <div class="media-grid" style="margin-top:.8rem">
+          <div class="media-item" style="padding:.5rem">
+            <!-- small decorative svg image -->
+            <svg viewBox="0 0 420 260" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" rx="8" fill="#071226"></rect><circle cx="105" cy="120" r="44" fill="#ff9a6a"></circle></svg>
+          </div>
+          <div class="media-item" style="padding:.5rem">
+            <svg viewBox="0 0 420 260" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" rx="8" fill="#061827"></rect><rect x="46" y="36" width="160" height="24" rx="8" fill="#06b6d4"></rect></svg>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="wrap-section">
+    <h3 class="section-title">Why diners love The Hungry Fork</h3>
+    <p class="section-sub">Fresh ingredients, chef-crafted dishes, and a warm, inviting atmosphere — we curate every detail to make your meal memorable.</p>
+
+    <div class="features-grid" role="list">
+      <div class="feature" role="listitem">
+        <div class="art" aria-hidden="true">🍽</div>
+        <div>
+          <h4 style="margin-bottom:.25rem">Fresh &amp; Local</h4>
+          <div class="muted">We partner with local farms to bring you seasonal produce and responsibly sourced ingredients.</div>
+        </div>
+      </div>
+
+      <div class="feature" role="listitem">
+        <div class="art" aria-hidden="true">👨‍🍳</div>
+        <div>
+          <h4 style="margin-bottom:.25rem">Chef-Crafted</h4>
+          <div class="muted">Creative dishes inspired by tradition and modern techniques.</div>
+        </div>
+      </div>
+
+      <div class="feature" role="listitem">
+        <div class="art" aria-hidden="true">⚡</div>
+        <div>
+          <h4 style="margin-bottom:.25rem">Fast &amp; Friendly Service</h4>
+          <div class="muted">Efficient service so you can enjoy quality without the wait.</div>
+        </div>
+      </div>
+
+      <div class="feature" role="listitem">
+        <div class="art" aria-hidden="true">🍷</div>
+        <div>
+          <h4 style="margin-bottom:.25rem">Cozy Ambiance</h4>
+          <div class="muted">Warm lighting and comfortable seating for all occasions.</div>
+        </div>
+      </div>
+
+      <div class="feature" role="listitem">
+        <div class="art" aria-hidden="true">🚚</div>
+        <div>
+          <h4 style="margin-bottom:.25rem">Delivery &amp; Pickup</h4>
+          <div class="muted">Order online for quick pickup or doorstep delivery.</div>
+        </div>
+      </div>
+
+      <div class="feature" role="listitem">
+        <div class="art" aria-hidden="true">💳</div>
+        <div>
+          <h4 style="margin-bottom:.25rem">Secure Payments</h4>
+          <div class="muted">Multiple payment options and contactless checkout available.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="wrap-section">
+    <h3 class="section-title">Meal Plans &amp; Pricing</h3>
+    <p class="section-sub">Simple plans for every appetite — from solo meals to family feasts.</p>
+
+    <div class="pricing-grid" role="list">
+      <div class="price-card" role="listitem">
+        <div class="title">Solo Meal</div>
+        <div class="big">$9</div>
+        <div class="muted">One main + side. Quick &amp; tasty.</div>
+        <div style="margin-top:.9rem"><button class="primary" onclick="openModal(&#39;Order: Solo Meal&#39;)">Order Solo</button></div>
+      </div>
+
+      <div class="price-card" role="listitem" style="border:2px solid rgba(255,107,53,0.08)">
+        <div class="title">Signature Platter</div>
+        <div class="big">$24</div>
+        <div class="muted">Great for 2–3 people. Chef's pick.</div>
+        <div style="margin-top:.9rem"><button class="primary" onclick="openModal(&#39;Pre-order: Signature Platter&#39;)">Pre-order</button></div>
+      </div>
+
+      <div class="price-card" role="listitem">
+        <div class="title">Family Feast</div>
+        <div class="big">$49</div>
+        <div class="muted">4 mains + 4 sides + dessert — big savings.</div>
+        <div style="margin-top:.9rem"><button class="primary" onclick="openModal(&#39;Reserve: Family Feast&#39;)">Reserve</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS (slider) -->
+  <section id="testimonials" class="wrap-section">
+    <h3 class="section-title">What Customers Say</h3>
+    <p class="section-sub">Real reviews from guests who loved their experience.</p>
+
+    <div class="testi-row" aria-live="polite">
+      <button id="prevTesti" aria-label="Previous testimonial" style="background:transparent;border:1px solid rgba(255,255,255,0.03);padding:.5rem;border-radius:8px;color:var(--muted);cursor:pointer">◀</button>
+
+      <div style="overflow:hidden;flex:1">
+        <div class="testi-track" id="testiTrack" style="transform: translateX(-757.225px);">
+          <div class="testi-card" style="min-width:260px">
+            <div style="display:flex;align-items:center">
+              <div class="avatar" aria-hidden="true">PR</div>
+              <div>
+                <strong>Priya R.</strong>
+                <div class="muted" style="font-size:.92rem">“Amazing flavors and quick service — my go-to spot!”</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testi-card" style="min-width:260px">
+            <div style="display:flex;align-items:center">
+              <div class="avatar">AK</div>
+              <div>
+                <strong>Arjun K.</strong>
+                <div class="muted" style="font-size:.92rem">“Loved the signature platter. Perfect for sharing.”</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testi-card" style="min-width:260px">
+            <div style="display:flex;align-items:center">
+              <div class="avatar">RM</div>
+              <div>
+                <strong>Riya M.</strong>
+                <div class="muted" style="font-size:.92rem">“Cozy place for family dinners. Friendly staff.”</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="nextTesti" aria-label="Next testimonial" style="background:transparent;border:1px solid rgba(255,255,255,0.03);padding:.5rem;border-radius:8px;color:var(--muted);cursor:pointer">▶</button>
+    </div>
+  </section>
+
+  <!-- MEDIA / VIDEO -->
+  <section id="media" class="wrap-section">
+    <h3 class="section-title">Watch Our Story</h3>
+    <p class="section-sub">A short behind-the-scenes video of our kitchen and signature dishes.</p>
+
+    <div style="display:flex;justify-content:center">
+      <!-- You can replace iframe with a local video tag: <video src="promo.mp4" controls> -->
+      <iframe width="900" height="506" src="./The Hungry Fork — Landing_files/m7lc1UVf-VE.html" title="Promo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="width:90%;max-width:900px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)"></iframe>
+    </div>
+  </section>
+
+  <!-- CONTACT / CTA -->
+  <section id="contact" class="wrap-section" style="padding-bottom:4rem">
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
+      <div style="max-width:720px">
+        <h3 class="section-title">Ready to treat your tastebuds?</h3>
+        <p class="muted">Book a table or place your pre-order — we’ll handle the rest.</p>
+      </div>
+      <div>
+        <button class="primary" onclick="openModal(&#39;Book a Table&#39;)">Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <footer style="text-align:center;padding:2rem 1rem;color:var(--muted)">
+    © 2025 The Hungry Fork — All rights reserved.
+  </footer>
+</main>
+
+<!-- Modal (booking / contact) -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+      <h3 id="modalTitle">Reserve</h3>
+      <button onclick="closeModal()" aria-label="Close" style="background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:1.2rem">✕</button>
+    </div>
+
+    <form id="modalForm" onsubmit="submitModal(event)">
+      <div class="form-row">
+        <label class="small-muted" for="mName">Name</label>
+        <input id="mName" required="" placeholder="Full name">
+      </div>
+
+      <div class="form-row">
+        <label class="small-muted" for="mContact">Phone or Email</label>
+        <input id="mContact" required="" placeholder="Phone or email">
+      </div>
+
+      <div class="form-row" style="display:flex;gap:.5rem">
+        <input id="mDate" type="date" required="" style="flex:1">
+        <input id="mTime" type="time" required="" style="flex:1">
+      </div>
+
+      <div style="display:flex;gap:.5rem;justify-content:flex-end">
+        <button type="button" onclick="closeModal()" style="background:#0b1220;padding:.6rem .9rem;border-radius:8px;border:1px solid rgba(255,255,255,0.03);color:var(--muted)">Cancel</button>
+        <button class="primary" type="submit">Confirm Booking</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+/* -------------------------
+   Interactive JS
+   ------------------------- */
+
+/* Header shrink on scroll */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) header.classList.add('shrink'); else header.classList.remove('shrink');
+});
+
+/* Mobile nav toggle (very simple) */
+function toggleMobileNav(){
+  const nav = document.querySelector('nav.desktop');
+  if(!nav) return;
+  if(nav.style.display === 'flex') nav.style.display = ''; else nav.style.display = 'flex';
+}
+
+/* Modal handling */
+const modal = document.getElementById('modal');
+function openModal(title = 'Reserve') {
+  document.getElementById('modalTitle').textContent = title;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  setTimeout(()=> document.getElementById('mName').focus(), 100);
+}
+function closeModal() {
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+}
+function submitModal(e) {
+  e.preventDefault();
+  const name = document.getElementById('mName').value.trim();
+  alert(`Thanks, ${name}! Your booking request has been received. We'll confirm shortly.`);
+  closeModal();
+  e.target.reset();
+}
+modal.addEventListener('click', (ev) => { if(ev.target === modal) closeModal(); });
+window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+
+/* Testimonials slider */
+const track = document.getElementById('testiTrack') || document.querySelector('.testi-track');
+const prevBtn = document.getElementById('prevTesti');
+const nextBtn = document.getElementById('nextTesti');
+let index = 0;
+const cards = track ? Array.from(track.children) : [];
+function showIndex(i) {
+  if(!track || cards.length === 0) return;
+  const cardWidth = cards[0].getBoundingClientRect().width + 16; // approximate gap
+  const maxIndex = cards.length - 1;
+  index = Math.max(0, Math.min(i, maxIndex));
+  track.style.transform = `translateX(${-index * cardWidth}px)`;
+}
+if(prevBtn) prevBtn.addEventListener('click', ()=> showIndex(index - 1));
+if(nextBtn) nextBtn.addEventListener('click', ()=> showIndex(index + 1));
+let auto = setInterval(()=> { showIndex(index >= cards.length -1 ? 0 : index + 1); }, 5000);
+if(track){
+  track.parentElement.addEventListener('mouseenter', ()=> clearInterval(auto));
+  track.parentElement.addEventListener('mouseleave', ()=> auto = setInterval(()=> { showIndex(index >= cards.length -1 ? 0 : index + 1); }, 5000));
+}
+
+/* Hero video fallback: hide video if not available after short wait */
+const heroVideo = document.getElementById('heroVideo');
+setTimeout(()=> {
+  if(heroVideo && heroVideo.readyState === 0) heroVideo.style.display = 'none';
+}, 700);
+
+/* Smooth anchor scrolling (for older browsers fallback since CSS 'scroll-behavior' usually works) */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e){
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+</script>
+
+
+</body></html>
